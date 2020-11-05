@@ -1,18 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <None Include="Data\SeedData\**" CopyToOutputDirectory="PreserveNewest" />
-    <ProjectReference Include="..\Core\Core.csproj"/>
+    <Compile Remove="Migrations\20201105113441_init.cs" />
+    <Compile Remove="Migrations\20201105113441_init.Designer.cs" />
+    <Compile Remove="Migrations\20201105174907_otherTables.cs" />
+    <Compile Remove="Migrations\20201105174907_otherTables.Designer.cs" />
+    <Compile Remove="Migrations\20201105182631_init.cs" />
+    <Compile Remove="Migrations\20201105182631_init.Designer.cs" />
+    <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1"/>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.1"/>
-    <PackageReference Include="StackExchange.Redis" Version="2.0.601"/>
-    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0"/>
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1"/>
-    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.6.0"/>
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0"/>
-    <PackageReference Include="Stripe.net" Version="34.19.0"/>
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.1"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.1" />
+    <PackageReference Include="StackExchange.Redis" Version="2.0.601" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.6.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
+    <PackageReference Include="Stripe.net" Version="34.19.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.1" />
   </ItemGroup>
   <PropertyGroup>
