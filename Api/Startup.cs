@@ -9,6 +9,8 @@ using Microsoft.Extensions.Hosting;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Core.Interfaces;
+using AutoMapper;
+using EShop.Helpers;
 
 namespace EShop
 {
@@ -29,7 +31,9 @@ namespace EShop
             {
                 x.UseSqlite(_config.GetConnectionString("DefaultConnection"));
             });
+            services.AddAutoMapper(typeof(MappingProfiles));
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,7 +47,7 @@ namespace EShop
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseStaticFiles();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
