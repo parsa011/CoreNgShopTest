@@ -1,16 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using Core.Interfaces;
-using AutoMapper;
-using EShop.Helpers;
+using EShop.MiddleWare;
+using EShop.Extensions;
 
 namespace EShop
 {
@@ -31,24 +26,21 @@ namespace EShop
             {
                 x.UseSqlite(_config.GetConnectionString("DefaultConnection"));
             });
-            services.AddAutoMapper(typeof(MappingProfiles));
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddApplicationServices();
+            services.AddSwaggerDocumentation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
+            app.UseMiddleware<ExceptionMiddleWare>();
+            app.UseStatusCodePagesWithReExecute("/errors/{0}");
             app.UseHttpsRedirection();
-
             app.UseRouting();
             app.UseStaticFiles();
             app.UseAuthorization();
+
+            app.UseSwaggerDocumention();
 
             app.UseEndpoints(endpoints =>
             {
